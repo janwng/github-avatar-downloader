@@ -33,15 +33,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 
-
-// function getAvatarUrl(data) {
-//   data.forEach((person) => {
-//     console.log(person.avatar_url);
-//   })
-// }
-
 function downloadImageByURL(url, filePath) {
-   request.get(url)
+   let req = request.get(url)
      .on('response', function (response) {
       console.log('Response Status Code: ', response.statusCode);
       console.log('Response Message: ', response.statusMessage);
@@ -51,10 +44,15 @@ function downloadImageByURL(url, filePath) {
       } else if (response.headers['content-type'] === 'image/png') {
         filePath += '.png';
       }
-      //cant use filepath until its been set to the correct value which is after the request is completed and response is done
-      //so thats why make the request again so it can get the NEW value of file path with the extension
-      request.get(url).pipe(fs.createWriteStream(filePath));
-    })
+
+      //cant use filepath until its been set to the correct value
+      //which is after the request is completed and response is done
+      //so you can either make the request again (which is weird)
+      //so it can get the NEW value of file path with the extension
+      //or you can set the original request function to a variable
+      //and pipe that NEW filePath so you can add on the file extensions
+      req.pipe(fs.createWriteStream(filePath));
+    });
 
 }
 
