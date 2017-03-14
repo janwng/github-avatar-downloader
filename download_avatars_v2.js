@@ -7,6 +7,8 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 var GITHUB_USER = "janwng";
 var GITHUB_TOKEN = "65bf00c8ec473576306dd40cca18204b39b2b8a1";
 
+const year = process.argv[2];
+
 
 
 function getRepoContributors(repoOwner, repoName, cb) {
@@ -25,13 +27,21 @@ function getRepoContributors(repoOwner, repoName, cb) {
     var data = JSON.parse(body);
     data.forEach((person) => {
       console.log(person.login);
+      // getAvatarUrl(data);
+      // downloadImageByURL(person.avatar_url, './downloads/' + person.login);
       downloadImageByURL(person.avatar_url, './downloads/' + person.login);
+
     });
     }
   });
 
 }
 
+function getAvatarUrl(data) {
+  data.forEach((person) => {
+    console.log(person.avatar_url);
+  })
+}
 
 function downloadImageByURL(url, filePath) {
    let req = request.get(url)

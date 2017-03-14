@@ -34,11 +34,11 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 //function to get individual avatar URL
-// function getAvatarUrl(data) {
-//   data.forEach((repoOwner) => {
-//     console.log(repoOwner.avatar_url);
-//   })
-// }
+function getAvatarUrl(data) {
+  data.forEach((repoOwner) => {
+    console.log(repoOwner.avatar_url);
+  })
+}
 
 //function to download image based on avatar URL
 function downloadImageByURL(url, filePath) {
