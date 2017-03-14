@@ -24,7 +24,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
       } else {
         var data = JSON.parse(body);
         data.forEach((repoOwner) => {
-          downloadImageByURL(repoOwner.avatar_url, './downloads/' + repoOwner.login);
+          downloadImageByURL(repoOwner.avatar_url, './avatars/' + repoOwner.login);
         });
       }
     });
@@ -47,7 +47,6 @@ function downloadImageByURL(url, filePath) {
       req.pipe(fs.createWriteStream(filePath));
     });
 }
-
 
 
 getRepoContributors("jquery", "jquery", function(err, result) {
