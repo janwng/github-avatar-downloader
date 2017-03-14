@@ -11,13 +11,16 @@ function downloadImageByURL(url, filePath) {
   let req = request.get(url)
     .on('response', function (response) {
       console.log('We are now downloading your image...');
+      var fullFilePath;
       if (response.headers['content-type'] === 'image/jpeg') {
-        filePath += '.jpg';
+        fullFilePath = filePath + '.jpg';
       } else if (response.headers['content-type'] === 'image/png') {
-        filePath += '.png';
+        fullFilePath = filePath + '.png';
+      } else {
+        fullFilePath = filePath;
       }
 
-      req.pipe(fs.createWriteStream(filePath));
+      req.pipe(fs.createWriteStream(fullFilePath));
     });
 }
 
